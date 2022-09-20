@@ -1,0 +1,540 @@
+/**
+ * MIT License
+ *
+ * Copyright (c) 2021-2022 FoxxoSnoot
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+html {
+    height: 100%;
+}
+
+body {
+    background: #ededed;
+    color: #000;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+}
+
+.main-holder {
+    padding-bottom: 100px;
+}
+
+a {
+    text-decoration: none!important;
+}
+
+p:last-child {
+    margin-bottom: 0;
+}
+
+b, strong {
+    font-weight: 600;
+}
+
+button {
+    outline: none!important;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+thead, .card-header {
+    background: #e8f7fe;
+    color: #419cd8;
+    font-weight: 700;
+    padding: 10px;
+    border: none;
+    border-bottom: 1.5px solid #419cd8;
+}
+
+thead th {
+    border: none!important;
+}
+
+tbody tr:first-child td {
+    border-top: none!important;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #212121;
+    text-align: center;
+    color: #fff;
+    padding: 20px 0
+}
+
+footer a {
+    color: #fff
+}
+
+.navbar {
+    background: #212121;
+    font-size: 1.1em;
+    padding-top: 6px;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+.navbar .navbar-brand {
+    margin-top: -5px;
+}
+
+.navbar .nav-link {
+    color: #fff;
+    padding: 8px 5px;
+    border-bottom: 2px solid transparent;
+}
+
+.navbar .nav-link:hover {
+    border-color: #fff;
+}
+
+.navbar .username {
+    color: #fff;
+    margin: 5px 0 0 15px;
+    float: right;
+    cursor: pointer;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.navbar .username .username-holder {
+    max-width: 125px;
+    display: inline-block;
+    text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+    user-select: none;
+}
+
+.navbar .username i {
+    vertical-align: text-top;
+    margin-top: -2px;
+    margin-left: 4px;
+}
+
+.navbar .dropdown-toggle {
+    margin-right: 0!important;
+}
+
+.navbar .dropdown-toggle::after {
+    border: none!important;
+    margin: 0!important;
+}
+
+.logout-dropdown {
+    background: #636363;
+    border: none;
+    border-radius: 5px;
+    padding: 0;
+    box-shadow: 0 2px 20px rgb(0 0 0 / 30%);
+    margin-left: -61px;
+    margin-top: 10px;
+}
+
+.logout-dropdown .dropdown-arrow {
+    z-index: 500;
+    left: 50%;
+    margin-left: -7px;
+    position: absolute;
+    top: -7px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #636363
+}
+
+.logout-dropdown .dropdown-item {
+    color: #fff;
+    border-radius: 5px!important;
+    padding: 10px 0 10px 5px;
+    transition: background-color .1s;
+}
+
+.logout-dropdown .dropdown-item:hover, .logout-dropdown .dropdown-item:focus {
+    background: #585858;
+}
+
+.card, .breadcrumb {
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
+}
+
+.card {
+    margin-bottom: 16px;
+}
+
+.card-body {
+    padding: 10px;
+}
+
+.row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+[class^='col-'] {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn {
+    box-shadow: none!important;
+}
+
+.pages {
+    text-align: center
+}
+
+.pages .page {
+    color: #a8a8a8;
+    padding: 5px;
+    font-weight: 600;
+    cursor: pointer
+}
+
+.pages .page:not(:last-child) {
+    padding-right: 5px
+}
+
+.pages .page.active {
+    color: #419cd8
+}
+
+button:not(.plain),
+.button:not(.plain) {
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid;
+    display: inline-block;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #d0d0d0;
+    border-color: #adadad
+}
+
+button:not(.plain):not([disabled]).blue,
+.button:not(.plain):not([disabled]).blue {
+    color: #fff;
+    background-color: #6fb6db;
+    border-color: #419dda
+}
+
+button:not(.plain):not([disabled]).green,
+.button:not(.plain):not([disabled]).green {
+    color: #fff;
+    background-color: #7cdc83;
+    border-color: #66bf5b
+}
+
+button:not(.plain):not([disabled]).red,
+.button:not(.plain):not([disabled]).red {
+    color: #fff;
+    background-color: #dc7c7c;
+    border-color: #da4141
+}
+
+button:not(.plain):not([disabled]).orange,
+.button:not(.plain):not([disabled]).orange {
+    color: #fff;
+    background-color: #f3b700;
+    border-color: #fc9700
+}
+
+button:not(.plain):not([disabled]).hgreen,
+.button:not(.plain):not([disabled]).hgreen {
+    color: #17c60a;
+    background-color: #e5fce2;
+    border-color: #17c60a
+}
+
+button:not(.plain):not([disabled]).hblue,
+.button:not(.plain):not([disabled]).hblue {
+    color: #419cd8;
+    background-color: #e8f7fe;
+    border-color: #419cd8
+}
+
+button:not(.plain):not([disabled]).hred,
+.button:not(.plain):not([disabled]).hred {
+    color: #fe5746;
+    background-color: #fedcde;
+    border-color: #fe5746
+}
+
+button:not(.plain):not([disabled]).horange,
+.button:not(.plain):not([disabled]).horange {
+    color: #fc9700;
+    background-color: #feedaa;
+    border-color: #fc9700
+}
+
+button:not(.plain):not([disabled]).bits,
+.button:not(.plain):not([disabled]).bits {
+    color: #fff;
+    background-color: #f49b00;
+    border-color: #f49b00
+}
+
+button:not(.plain):not([disabled]).bucks,
+.button:not(.plain):not([disabled]).bucks {
+    color: #fff;
+    background-color: #009624;
+    border-color: #009624
+}
+
+button:not(.plain):not([disabled]).free,
+.button:not(.plain):not([disabled]).free {
+    color: #fff;
+    background-color: #6fb6db;
+    border-color: #419dda
+}
+
+button[disabled],
+.button[disabled] {
+    cursor: not-allowed!important
+}
+
+button.plain,
+.button.plain {
+    border: 0;
+    font-size: 1em;
+    padding: 0
+}
+
+button.no-click,
+button.no-click[disabled],
+.button.no-click,
+.button.no-click[disabled] {
+    cursor: default;
+    color: #fff;
+    background-color: #d0d0d0;
+    border-color: #adadad
+}
+
+button:hover,
+.button:hover {
+    cursor: pointer
+}
+
+button.no-cap,
+.button.no-cap {
+    text-transform: inherit
+}
+
+button.flat,
+.button.flat {
+    border-color: transparent
+}
+
+button.small,
+.button.small {
+    padding: 5px 10px
+}
+
+@media only screen and (min-width: 768px) {
+    .show-sm-only {
+        display: none !important
+    }
+
+    .mb-sm-only {
+        margin-bottom: 0 !important
+    }
+
+    .nav-tabs.card-header-nav-tabs {
+        margin-bottom: -5px
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .hide-sm {
+        display: none !important
+    }
+
+    .full-width-sm {
+        width: 100% !important
+    }
+
+    .text-center-sm {
+        text-align: center !important
+    }
+
+    .navbar .nav-item {
+        display: inline;
+    }
+
+    .logout-dropdown {
+        margin-left: -125px;
+    }
+
+    .footer-push {
+        margin-top: 50px;
+    }
+}
+
+.form-control {
+    box-shadow: none!important;
+}
+
+.icon,
+.special-e-icon,
+.special-icon,
+.arrow-down,
+.messages-icon,
+.friends-icon,
+.bits-icon,
+.bucks-icon,
+.royal-icon,
+.ace-icon,
+.mint-icon {
+	vertical-align: top;
+	background-image: url(/css/sprites.svg?v=1);
+	background-repeat: no-repeat;
+	background-size: auto auto;
+	display: inline-block;
+    vertical-align: middle
+}
+
+.mint-icon {
+	margin-left: 3px;
+	width: 24px;
+	height: 24px;
+	background-position: 0 0;
+	vertical-align: sub
+}
+
+.ace-icon {
+	margin-left: 3px;
+	width: 24px;
+	height: 24px;
+	background-position: -29px 0;
+	vertical-align: sub
+}
+
+.royal-icon {
+	margin-left: 3px;
+	width: 24px;
+	height: 24px;
+	background-position: -58px 0;
+	vertical-align: sub
+}
+
+.bucks-icon {
+	padding-right: 3px;
+	width: 20px;
+	height: 20px;
+	background-position: 0 -29px
+}
+
+.bits-icon {
+	padding-right: 3px;
+	width: 20px;
+	height: 20px;
+	background-position: -25px -29px
+}
+
+.friends-icon {
+	padding-right: 3px;
+	width: 20px;
+	height: 20px;
+	background-position: -50px -29px
+}
+
+.messages-icon {
+	padding-right: 3px;
+	width: 20px;
+	height: 20px;
+	background-position: -75px -29px
+}
+
+.arrow-down {
+	padding-right: 3px;
+	width: 17px;
+	height: 19px;
+	background-position: 0 -140px;
+	vertical-align: text-bottom;
+	margin-left: 10px
+}
+
+.special-icon {
+	width: 60px;
+	height: 60px;
+	background-position: 1px -75px;
+	position: absolute;
+	top: 0;
+	right: 0
+}
+
+.special-e-icon {
+	width: 60px;
+	height: 60px;
+	background-position: -64px -75px;
+	position: absolute;
+	top: 0;
+	right: 0
+}
+
+.owned-check-tri {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	border-left: 50px solid transparent
+}
+
+.owned-check {
+	height: 2em;
+	font-size: 1em;
+	transform: translateY(-135%) translateX(-135%);
+	color: #fff;
+	text-align: center
+}
+
+.img-white {
+    filter: brightness(0) invert(1);
+}
+
+.bits-text {
+    color: #f49b00
+}
+
+.bucks-text {
+    color: #009624
+}
+
+.free-text {
+    color: #0f7bff
+}
+
+.offsale-text {
+    color: #cacaca
+}

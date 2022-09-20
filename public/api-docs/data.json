@@ -1,0 +1,1254 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Brick Hill API Documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/games/retrieveAvatar": {
+            "get": {
+                "tags": [
+                    "Sets"
+                ],
+                "summary": "Returns avatar info",
+                "operationId": "getAvatarInfo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "The user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/v1/sets/{setId}": {
+            "get": {
+                "tags": [
+                    "Sets"
+                ],
+                "summary": "Returns info of an set",
+                "operationId": "getSetInfo",
+                "parameters": [
+                    {
+                        "name": "setId",
+                        "in": "path",
+                        "description": "The set id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/Set"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/v1/shop/list": {
+            "get": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "Returns items for the shop page",
+                "operationId": "getLatestItems",
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Method of sorting items",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "updated",
+                            "enum": [
+                                "updated",
+                                "newest",
+                                "oldest",
+                                "expensive",
+                                "inexpensive"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Name of item type to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search for specific item name",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#components/parameters/cursor"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ItemV2"
+                                            }
+                                        },
+                                        "next_cursor": {
+                                            "type": "string"
+                                        },
+                                        "previous_cursor": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/v1/shop/{itemId}": {
+            "get": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "Returns info of an item",
+                "operationId": "getItemInfo",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "The item id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/ItemV2"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/v1/shop/{itemId}/owners": {
+            "get": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "Returns a list of owners of an item",
+                "operationId": "getItemOwners",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "The item id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "$ref": "#components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#components/parameters/cursor"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Crate"
+                                            }
+                                        },
+                                        "next_cursor": {
+                                            "type": "string"
+                                        },
+                                        "previous_cursor": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/v1/shop/{itemId}/resellers": {
+            "get": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "Returns a list of resellers of an item",
+                "operationId": "getItemResellers",
+                "parameters": [
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "The item id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "$ref": "#components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#components/parameters/cursor"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/SpecialSeller"
+                                            }
+                                        },
+                                        "next_cursor": {
+                                            "type": "string"
+                                        },
+                                        "previous_cursor": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/v1/user/trades/{userId}/{type}": {
+            "get": {
+                "tags": [
+                    "Trade"
+                ],
+                "summary": "Returns trades based on authenticated user",
+                "operationId": "getMyTrades",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "The user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "description": "Sort type of trades",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "default": "inbound",
+                            "enum": [
+                                "inbound",
+                                "outbound",
+                                "history",
+                                "accepted",
+                                "declined"
+                            ]
+                        }
+                    },
+                    {
+                        "$ref": "#components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#components/parameters/cursor"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/v1/user/trades/{tradeId}": {
+            "get": {
+                "tags": [
+                    "Trade"
+                ],
+                "summary": "Returns trade information",
+                "operationId": "getTradeInfo",
+                "parameters": [
+                    {
+                        "name": "tradeId",
+                        "in": "path",
+                        "description": "The trade id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/v1/user/profile": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Returns info of a user",
+                "operationId": "getUserInfo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "The user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/v1/user/id": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Returns id of a user from username",
+                "operationId": "getUserFromUsername",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "The username",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserSmall"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/v1/user/{userId}/crate": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Returns items that a user owns",
+                "operationId": "getCrate",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "The user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Name of item type to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "$ref": "#components/parameters/limit"
+                    },
+                    {
+                        "$ref": "#components/parameters/cursor"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        },
+        "/api/v1/user/{userId}/owns/{itemId}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Returns whether a user owns an item or not",
+                "operationId": "getOwns",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "The user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "itemId",
+                        "in": "path",
+                        "description": "The item id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "owns": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "DefaultError": {
+                "properties": {
+                    "error": {
+                        "properties": {
+                            "message": {
+                                "description": "Error message",
+                                "type": "string",
+                                "example": "Record not found"
+                            },
+                            "prettyMessage": {
+                                "description": "Error message shown to users",
+                                "type": "string",
+                                "example": "Sorry, something went wrong"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "NotFound": {
+                "properties": {
+                    "error": {
+                        "properties": {
+                            "message": {
+                                "description": "Error message",
+                                "type": "string",
+                                "example": "Record not found"
+                            },
+                            "prettyMessage": {
+                                "description": "Error message shown to users",
+                                "type": "string",
+                                "example": "Sorry, something went wrong"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "Item": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the item",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "type_id": {
+                        "title": "typeId",
+                        "description": "Type Id of the item",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 6
+                    },
+                    "special": {
+                        "title": "special",
+                        "description": "Bool for special",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "special_edition": {
+                        "title": "specialEdition",
+                        "description": "Bool for special edition",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "special_q": {
+                        "title": "specialQ",
+                        "description": "Stock for a special item",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "thumbnail": {
+                        "title": "thumbnail",
+                        "description": "URL for item thumbnail",
+                        "type": "string",
+                        "format": "string",
+                        "example": "https://brkcdn.com/v2/images/shop/thumbnails/a9d071bf-8a50-5ebb-8de5-eb34647b6673.png"
+                    },
+                    "approved": {
+                        "title": "approved",
+                        "description": "Bool for item being approved",
+                        "type": "boolean",
+                        "format": "boolean",
+                        "example": true
+                    },
+                    "bits": {
+                        "title": "bits",
+                        "description": "Price of item in bits",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "bucks": {
+                        "title": "bucks",
+                        "description": "Price of item in bucks",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Name",
+                        "type": "string",
+                        "format": "string",
+                        "example": "brick-luke's Jacket"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Everyone deserves to look cool!"
+                    },
+                    "created_at": {
+                        "title": "createdAt",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "title": "updatedAt",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "ItemType": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the type",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 6
+                    },
+                    "type": {
+                        "title": "type",
+                        "description": "Type in string form",
+                        "type": "integer",
+                        "format": "string",
+                        "example": "tshirt"
+                    }
+                },
+                "type": "object"
+            },
+            "ItemV2": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the item",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "creator": {
+                        "$ref": "#components/schemas/UserSmall"
+                    },
+                    "type": {
+                        "$ref": "#components/schemas/ItemType"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Name",
+                        "type": "string",
+                        "format": "string",
+                        "example": "brick-luke's Jacket"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Everyone deserves to look cool!"
+                    },
+                    "bits": {
+                        "title": "bits",
+                        "description": "Price of item in bits",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "bucks": {
+                        "title": "bucks",
+                        "description": "Price of item in bucks",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "offsale": {
+                        "title": "offsale",
+                        "description": "Bool for if the item is offsale",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "special_edition": {
+                        "title": "specialEdition",
+                        "description": "Bool for special edition",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "special": {
+                        "title": "special",
+                        "description": "Bool for special",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "stock": {
+                        "title": "stock",
+                        "description": "Stock for a special item",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "timer": {
+                        "title": "timer",
+                        "description": "Bool for if timer is active",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "timer_date": {
+                        "title": "timerDate",
+                        "description": "Time which the item will go offsale if the timer is active",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "average_price": {
+                        "title": "averagePrice",
+                        "description": "Average price for a special item",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 80
+                    },
+                    "thumbnail": {
+                        "title": "thumbnail",
+                        "description": "URL for item thumbnail",
+                        "type": "string",
+                        "format": "string",
+                        "example": "https://brkcdn.com/v2/images/shop/thumbnails/a9d071bf-8a50-5ebb-8de5-eb34647b6673.png"
+                    },
+                    "created_at": {
+                        "title": "createdAt",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "title": "updatedAt",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "SpecialSeller": {
+                "properties": {
+                    "crate_id": {
+                        "title": "id",
+                        "description": "Id of the crate",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "serial": {
+                        "title": "serial",
+                        "description": "Serial of the crate",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "user": {
+                        "$ref": "#components/schemas/UserSmall"
+                    },
+                    "bucks": {
+                        "title": "bucks",
+                        "description": "Price of the reseller",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 400
+                    }
+                },
+                "type": "object"
+            },
+            "Set": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the set",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "creator": {
+                        "$ref": "#components/schemas/UserSmall"
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Name",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Planegg of Mars - Egg Hunt 2018"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Explore the extraterrestrial environment with you and your friends as you compete to find all of the treasures it has to offer!"
+                    },
+                    "playing": {
+                        "title": "playing",
+                        "description": "Number of users in the set",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 0
+                    },
+                    "vists": {
+                        "title": "visits",
+                        "description": "Number of visits",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 2426
+                    },
+                    "created_at": {
+                        "title": "createdAt",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "title": "updatedAt",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Award": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the award",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 0
+                    },
+                    "user_id": {
+                        "title": "userId",
+                        "description": "Owner of the award",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1003
+                    },
+                    "award_id": {
+                        "title": "awardId",
+                        "description": "Type of the award",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 3
+                    },
+                    "award": {
+                        "$ref": "#components/schemas/AwardType"
+                    }
+                },
+                "type": "object"
+            },
+            "AwardType": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the award",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 3
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the award",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Admin"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description of the award",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Users with this award work for Brick Hill."
+                    }
+                },
+                "type": "object"
+            },
+            "Crate": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the crate",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "serial": {
+                        "title": "serial",
+                        "description": "Serial of the crate",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "user": {
+                        "$ref": "#components/schemas/UserSmall"
+                    },
+                    "created_at": {
+                        "title": "createdAt",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "title": "updatedAt",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "CrateV1": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the crate",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "serial": {
+                        "title": "serial",
+                        "description": "Serial of the crate",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "username": {
+                        "title": "username",
+                        "description": "Crate owners username",
+                        "type": "string",
+                        "example": "Brick Hill"
+                    },
+                    "user_id": {
+                        "title": "userId",
+                        "description": "Crate owners user id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "title": "createdAt",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "title": "updatedAt",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Membership": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the membership",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "user_id": {
+                        "title": "userId",
+                        "description": "Owner of the membership",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "membership": {
+                        "title": "membership",
+                        "description": "Type of membership",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 4
+                    },
+                    "date": {
+                        "title": "date",
+                        "description": "Date that the membership started",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "length": {
+                        "title": "length",
+                        "description": "Length of the membership",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 43800
+                    },
+                    "active": {
+                        "title": "active",
+                        "description": "Bool if membership is currently active",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "title": "createdAt",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "title": "updatedAt",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "Status": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the status",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "owner_id": {
+                        "title": "ownerId",
+                        "description": "Creator of the status",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1003
+                    },
+                    "clan_id": {
+                        "title": "clanId",
+                        "description": "Creator of the status",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": null
+                    },
+                    "type": {
+                        "title": "type",
+                        "description": "Type of owner of the status",
+                        "type": "string",
+                        "format": "string",
+                        "example": "user"
+                    },
+                    "body": {
+                        "title": "body",
+                        "description": "Body of the status",
+                        "type": "string",
+                        "format": "string",
+                        "example": "We've hit the big 10k!"
+                    },
+                    "date": {
+                        "title": "date",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the user",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1003
+                    },
+                    "username": {
+                        "title": "username",
+                        "description": "Username of the user",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Brick Hill"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description of the user",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Welcome to Brick Hill!"
+                    },
+                    "img": {
+                        "title": "img",
+                        "description": "UUID of user thumbnail",
+                        "type": "string",
+                        "format": "uuid",
+                        "example": "5edc319d-2c25-46fa-b6c9-6152285c2854"
+                    },
+                    "awards": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#components/schemas/Award"
+                        }
+                    },
+                    "status": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#components/schemas/Status"
+                        }
+                    },
+                    "membership": {
+                        "$ref": "#components/schemas/Membership"
+                    },
+                    "last_online": {
+                        "title": "lastOnline",
+                        "description": "Date of last online",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "created_at": {
+                        "title": "createdAt",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            },
+            "UserSmall": {
+                "properties": {
+                    "id": {
+                        "title": "id",
+                        "description": "Id of the user",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1003
+                    },
+                    "username": {
+                        "title": "username",
+                        "description": "Username of the user",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Brick Hill"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "responses": {
+            "404": {
+                "description": "Specified id not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/NotFound"
+                        }
+                    }
+                }
+            }
+        },
+        "parameters": {
+            "limit": {
+                "name": "limit",
+                "in": "query",
+                "description": "Amount of results",
+                "schema": {
+                    "type": "enum",
+                    "default": 10,
+                    "enum": [
+                        1,
+                        10,
+                        25,
+                        50,
+                        100
+                    ]
+                }
+            },
+            "cursor": {
+                "name": "cursor",
+                "in": "query",
+                "description": "Paging cursor",
+                "schema": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
